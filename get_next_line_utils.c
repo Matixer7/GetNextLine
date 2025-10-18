@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgumienn <mgumienn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgumienn <mgumienn@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 18:16:47 by mgumienn          #+#    #+#             */
-/*   Updated: 2025/10/18 14:39:49 by mgumienn         ###   ########.fr       */
+/*   Updated: 2025/10/18 15:37:46 by mgumienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,14 @@ char	*ft_strjoin(char *s1, char c)
 	char	*str;
 	size_t	i;
 	size_t	s1_len;
-	size_t	s2_len;
 
 	i = 0;
 	if (!s1)
 		return (ft_strjoin("", c));
 	s1_len = ft_strlen(s1);
-	s2_len = 1;
-	if (s1_len != 0 && s2_len > SIZE_MAX / s1_len)
+	if (s1_len != 0 && 1 > SIZE_MAX / s1_len)
 		return (NULL);
-	str = malloc(s1_len + s2_len + 1);
+	str = malloc(s1_len + 1 + 1);
 	if (!str)
 		return (NULL);
 	while (s1[i] != '\0')
@@ -88,8 +86,10 @@ void	load(int fd, char ***f_content)
 
 	i = 0;
 	rd = read(fd, buffer, BUFFER_SIZE);
-	if (buffer[i] == '\0')
+	if (!rd)
 		return ;
+	if (buffer[i] == '\0')
+		*f_content[0] = ft_strjoin(*f_content[0], '\0');
 	while (buffer[i] != '\0' && buffer[i] != '\n')
 	{
 		*f_content[0] = ft_strjoin(*f_content[0], buffer[i]);

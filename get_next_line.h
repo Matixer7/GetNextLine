@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgumienn <mgumienn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgumienn <mgumienn@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:25:24 by mgumienn          #+#    #+#             */
-/*   Updated: 2025/10/18 14:40:33 by mgumienn         ###   ########.fr       */
+/*   Updated: 2025/10/18 15:38:11 by mgumienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@
 
 char	*get_next_line(int fd);
 void	load(int fd, char ***f_content);
+int	ft_strchr(char *str, int c);
 
 #endif
