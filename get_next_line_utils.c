@@ -6,7 +6,7 @@
 /*   By: mgumienn <mgumienn@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 18:16:47 by mgumienn          #+#    #+#             */
-/*   Updated: 2025/10/18 15:37:46 by mgumienn         ###   ########.fr       */
+/*   Updated: 2025/10/19 14:51:15 by mgumienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(char *str)
 	size_t	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i])
 		i++;
 	return (i);
@@ -42,7 +44,7 @@ char	*ft_strdup(char *src)
 
 int	ft_strchr(char *str, int c)
 {
-	if (c == 0)
+	if (c == 0 || !str)
 		return (0);
 	while (*str)
 	{
@@ -78,31 +80,25 @@ char	*ft_strjoin(char *s1, char c)
 	return (str);
 }
 
-void	load(int fd, char ***f_content)
+size_t	ft_strlcpy(char **dest, char *src, size_t size)
 {
-	int		rd;
-	char	buffer[BUFFER_SIZE];
 	size_t	i;
+	size_t	src_size;
+	char	*temp;
 
 	i = 0;
-	rd = read(fd, buffer, BUFFER_SIZE);
-	if (!rd)
-		return ;
-	if (buffer[i] == '\0')
-		*f_content[0] = ft_strjoin(*f_content[0], '\0');
-	while (buffer[i] != '\0' && buffer[i] != '\n')
+	src_size = ft_strlen(src);
+	temp = malloc(sizeof(char) * src_size);
+	if (size != 0)
 	{
-		*f_content[0] = ft_strjoin(*f_content[0], buffer[i]);
+		while (i < (size - 1) && src[i] != '\0')
+		{
+			temp[i] = src[i];
+			i++;
+		}
+		temp[i] = '\0';
 		i++;
+		*dest = temp;
 	}
-	if (buffer[i] == '\n')
-	{
-		if(buffer[i + 1])
-			*f_content[1] = ft_strdup(&buffer[i + 1]);
-		return ;
-	}
-	else if (ft_strchr(*f_content[0], '\0'))
-		return ;
-	else 
-		load(fd, f_content);
+	return (src_size);
 }
