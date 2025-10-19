@@ -6,7 +6,7 @@
 /*   By: mgumienn <mgumienn@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:25:24 by mgumienn          #+#    #+#             */
-/*   Updated: 2025/10/19 14:59:39 by mgumienn         ###   ########.fr       */
+/*   Updated: 2025/10/19 17:57:40 by mgumienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <fcntl.h>
 
 #ifndef BUFFER_SIZE 
-# define BUFFER_SIZE 4
+# define BUFFER_SIZE 1
 #endif
 
 char	*get_next_line(int fd);

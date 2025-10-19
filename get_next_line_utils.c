@@ -6,7 +6,7 @@
 /*   By: mgumienn <mgumienn@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 18:16:47 by mgumienn          #+#    #+#             */
-/*   Updated: 2025/10/19 14:51:15 by mgumienn         ###   ########.fr       */
+/*   Updated: 2025/10/19 17:18:26 by mgumienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,26 @@ char	*ft_strjoin(char *s1, char c)
 
 	i = 0;
 	if (!s1)
-		return (ft_strjoin("", c));
+	{
+		str = malloc(2);
+		if (!str)
+			return (NULL);
+		str[0] = c;
+		str[1] = '\0';
+		return (str);
+	}
 	s1_len = ft_strlen(s1);
-	if (s1_len != 0 && 1 > SIZE_MAX / s1_len)
-		return (NULL);
-	str = malloc(s1_len + 1 + 1);
+	str = malloc(s1_len + 2);
 	if (!str)
 		return (NULL);
-	while (s1[i] != '\0')
+	while (s1[i])
 	{
 		str[i] = s1[i];
 		i++;
 	}
 	str[i] = c;
 	str[i + 1] = '\0';
+	free(s1);
 	return (str);
 }
 
@@ -84,21 +90,19 @@ size_t	ft_strlcpy(char **dest, char *src, size_t size)
 {
 	size_t	i;
 	size_t	src_size;
-	char	*temp;
 
 	i = 0;
+	if (!src)
+		return (0);
 	src_size = ft_strlen(src);
-	temp = malloc(sizeof(char) * src_size);
-	if (size != 0)
+	if (size > 0)
 	{
-		while (i < (size - 1) && src[i] != '\0')
+		while (i < (size - 1) && src[i])
 		{
-			temp[i] = src[i];
+			(*dest)[i] = src[i];
 			i++;
 		}
-		temp[i] = '\0';
-		i++;
-		*dest = temp;
+		(*dest)[i] = '\0';
 	}
 	return (src_size);
 }
