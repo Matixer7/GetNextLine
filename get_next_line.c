@@ -6,7 +6,7 @@
 /*   By: mgumienn <mgumienn@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:25:21 by mgumienn          #+#    #+#             */
-/*   Updated: 2025/10/19 18:41:03 by mgumienn         ###   ########.fr       */
+/*   Updated: 2025/10/19 21:05:00 by mgumienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,18 @@ void	ft_trim(char **line, char **f_content)
 char	*ft_read(int fd, char **f_content, char **line)
 {
 	size_t	rd;
-	char	buffer[BUFFER_SIZE + 1];
+	char	*buffer;
 	size_t	i;
 
+	buffer = malloc(BUFFER_SIZE + 1);
 	rd = read(fd, buffer, BUFFER_SIZE);
-	if (rd <= 0)
-		return (NULL);
+	if (rd <= 0 || !buffer)
+		return (free(buffer), NULL);
 	buffer[rd] = '\0';
 	i = 0;
 	while (buffer[i] && buffer[i] != '\n')
 		*line = ft_strjoin(*line, buffer[i++]);
-	if (buffer[i] == '\n')
+	if (buffer[i] && buffer[i] == '\n')
 	{
 		*line = ft_strjoin(*line, buffer[i++]);
 		if (buffer[i])
@@ -59,9 +60,9 @@ char	*ft_read(int fd, char **f_content, char **line)
 				free(*f_content);
 			*f_content = ft_strdup(&buffer[i]);
 		}
-		return (*line);
+		return (free(buffer), *line);
 	}
-	return (ft_read(fd, f_content, line));
+	return (free(buffer), ft_read(fd, f_content, line));
 }
 
 char	*get_next_line(int fd)
@@ -87,17 +88,17 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-#include "stdio.h"
-int main()
-{
-	int fd = open("test.txt", O_RDONLY);
-	char *line;
+// #include "stdio.h"
+// int main()
+// {
+// 	int fd = open("./gnlTester/files/nl", O_RDONLY);
+// 	char *line;
 	
-	while ((line = get_next_line(fd)))
-	{
-		printf("%s", line);
-		free(line);
-	}
-	close(fd);
-	return (0);
-}
+// 	while ((line = get_next_line(fd)))
+// 	{
+// 		printf("%s", line);
+// 		free(line);
+// 	}
+// 	close(fd);
+// 	return (0);
+// }
