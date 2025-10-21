@@ -6,7 +6,7 @@
 /*   By: mgumienn <mgumienn@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:25:21 by mgumienn          #+#    #+#             */
-/*   Updated: 2025/10/19 21:05:00 by mgumienn         ###   ########.fr       */
+/*   Updated: 2025/10/21 18:35:24 by mgumienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*get_next_line(int fd)
 	static char	*f_content;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (!fd || fd <= 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	line = NULL;
 	if (f_content && !ft_strchr(f_content, '\n'))
@@ -85,20 +85,25 @@ char	*get_next_line(int fd)
 		return (line);
 	if (!f_content)
 		ft_read(fd, &f_content, &line);
+	if (line == NULL && f_content)
+		free(f_content);
 	return (line);
 }
 
 // #include "stdio.h"
 // int main()
 // {
-// 	int fd = open("./gnlTester/files/nl", O_RDONLY);
+// 	int fd = open("./gnlTester/files/alternate_line_nl_with_nl", O_RDONLY);
 // 	char *line;
+	
 	
 // 	while ((line = get_next_line(fd)))
 // 	{
 // 		printf("%s", line);
 // 		free(line);
 // 	}
+// 	if (line == NULL)
+// 		write(1, "NULL", 5);
 // 	close(fd);
 // 	return (0);
 // }
