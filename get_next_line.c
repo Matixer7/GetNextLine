@@ -6,7 +6,7 @@
 /*   By: mgumienn <mgumienn@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:25:21 by mgumienn          #+#    #+#             */
-/*   Updated: 2025/10/21 18:35:24 by mgumienn         ###   ########.fr       */
+/*   Updated: 2025/10/22 16:25:18 by mgumienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,17 +93,22 @@ char	*get_next_line(int fd)
 // #include "stdio.h"
 // int main()
 // {
-// 	int fd = open("./gnlTester/files/alternate_line_nl_with_nl", O_RDONLY);
+// 	int fd = open("./gnl-station-tester/test/11-bg.txt", O_RDONLY);
 // 	char *line;
-	
 	
 // 	while ((line = get_next_line(fd)))
 // 	{
 // 		printf("%s", line);
 // 		free(line);
 // 	}
-// 	if (line == NULL)
-// 		write(1, "NULL", 5);
+// 	close(fd);
+// 	printf("\n\n\n-------------------------------------------------------------------------------------------------------------------\n\n\n");
+// 	fd = open("./gnl-station-tester/test/12-bigben.txt", O_RDONLY);
+// 	while ((line = get_next_line(fd)))
+// 	{
+// 		printf("%s", line);
+// 		free(line);
+// 	}
 // 	close(fd);
 // 	return (0);
 // }
