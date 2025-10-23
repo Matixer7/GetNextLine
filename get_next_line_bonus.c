@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgumienn <mgumienn@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:25:21 by mgumienn          #+#    #+#             */
-/*   Updated: 2025/10/23 16:08:08 by mgumienn         ###   ########.fr       */
+/*   Updated: 2025/10/23 17:35:14 by mgumienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,26 +69,26 @@ char	*ft_read(int fd, char **f_content, char **line)
 
 char	*get_next_line(int fd)
 {
-	static char	*f_content;
+	static char	*f_content[1024];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	line = NULL;
-	if (f_content && !ft_strchr(f_content, '\n'))
+	if (f_content[fd] && !ft_strchr(f_content[fd], '\n'))
 	{
-		line = ft_strdup(f_content);
-		free(f_content);
-		f_content = NULL;
+		line = ft_strdup(f_content[fd]);
+		free(f_content[fd]);
+		f_content[fd] = NULL;
 	}
-	if(f_content && ft_strchr(f_content, '\n') && !line)
-		ft_trim(&line, &f_content);
-	if (f_content && line)
+	if(f_content[fd] && ft_strchr(f_content[fd], '\n') && !line)
+		ft_trim(&line, &f_content[fd]);
+	if (f_content[fd] && line)
 		return (line);
-	if (!f_content)
-		ft_read(fd, &f_content, &line);
-	if (line == NULL && f_content)
-		free(f_content);
+	if (!f_content[fd])
+		ft_read(fd, &f_content[fd], &line);
+	if (line == NULL && f_content[fd])
+		free(f_content[fd]);
 	return (line);
 }
 
