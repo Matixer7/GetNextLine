@@ -6,7 +6,7 @@
 /*   By: mgumienn <mgumienn@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 18:16:47 by mgumienn          #+#    #+#             */
-/*   Updated: 2025/10/19 17:18:26 by mgumienn         ###   ########.fr       */
+/*   Updated: 2025/10/24 18:25:44 by mgumienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,7 @@ char	*ft_strjoin(char *s1, char c)
 		if (!str)
 			return (NULL);
 		str[0] = c;
-		str[1] = '\0';
-		return (str);
+		return (str[1] = '\0', str);
 	}
 	s1_len = ft_strlen(s1);
 	str = malloc(s1_len + 2);
@@ -82,8 +81,7 @@ char	*ft_strjoin(char *s1, char c)
 	}
 	str[i] = c;
 	str[i + 1] = '\0';
-	free(s1);
-	return (str);
+	return (free(s1), str);
 }
 
 size_t	ft_strlcpy(char **dest, char *src, size_t size)

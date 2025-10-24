@@ -6,7 +6,7 @@
 /*   By: mgumienn <mgumienn@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:25:21 by mgumienn          #+#    #+#             */
-/*   Updated: 2025/10/23 17:35:14 by mgumienn         ###   ########.fr       */
+/*   Updated: 2025/10/24 18:24:37 by mgumienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,42 +91,3 @@ char	*get_next_line(int fd)
 		free(f_content[fd]);
 	return (line);
 }
-
-//#include "stdio.h"
-// int main()
-// {
-// 	int fd = open("./gnl-station-tester/test/11-bg.txt", O_RDONLY);
-// 	char *line;
-	
-// 	while ((line = get_next_line(fd)))
-// 	{
-// 		printf("%s", line);
-// 		free(line);
-// 	}
-// 	close(fd);
-// 	printf("\n\n\n-------------------------------------------------------------------------------------------------------------------\n\n\n");
-// 	fd = open("./gnl-station-tester/test/12-bigben.txt", O_RDONLY);
-// 	while ((line = get_next_line(fd)))
-// 	{
-// 		printf("%s", line);
-// 		free(line);
-// 	}
-// 	close(fd);
-// 	return (0);
-// }
-
-// int main()
-// {
-// 	//int fd = open("./gnl-station-tester/test/11-bg.txt", O_RDONLY);
-// 	char *line;
-// 	int fd = 1000;
-	
-// 	while ((line = get_next_line(fd)))
-// 	{
-// 		printf("%s", line);
-// 		free(line);
-// 	}
-// 	close(fd);
-// 	printf("\n\n\n-------------------------------------------------------------------------------------------------------------------\n\n\n");
-// 	return (0);
-// }
