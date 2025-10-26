@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgumienn <mgumienn@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: mgumienn <mgumienn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:25:21 by mgumienn          #+#    #+#             */
-/*   Updated: 2025/10/24 18:24:37 by mgumienn         ###   ########.fr       */
+/*   Updated: 2025/10/26 13:38:56 by mgumienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,10 @@ char	*ft_read(int fd, char **f_content, char **line)
 	if (buffer[i] && buffer[i] == '\n')
 	{
 		*line = ft_strjoin(*line, buffer[i++]);
+		if (*f_content)
+			free(*f_content);
 		if (buffer[i])
-		{
-			if (*f_content)
-				free(*f_content);
 			*f_content = ft_strdup(&buffer[i]);
-		}
 		return (free(buffer), *line);
 	}
 	return (free(buffer), ft_read(fd, f_content, line));
@@ -81,7 +79,7 @@ char	*get_next_line(int fd)
 		free(f_content[fd]);
 		f_content[fd] = NULL;
 	}
-	if(f_content[fd] && ft_strchr(f_content[fd], '\n') && !line)
+	if (f_content[fd] && ft_strchr(f_content[fd], '\n') && !line)
 		ft_trim(&line, &f_content[fd]);
 	if (f_content[fd] && line)
 		return (line);
